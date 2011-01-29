@@ -1,0 +1,14 @@
+#!/bin/bash
+
+stty -f /dev/tty.usbmodem12341 ospeed 57600 ispeed 57600 cs8 ignbrk -ignpar -cstopb -hupcl -echo -ixon -crtscts -imaxbel
+    cat < "/dev/tty.usbmodem12341" &
+        catpid=$!
+        trap '[ -n "$catpid" ] && kill $catpid; catpid=""' EXIT INT QUIT TERM
+        if [ -e "/dev/tty.usbmodem12341" ]; then
+            cat >"/dev/tty.usbmodem12341"
+            exit $?
+        else
+            echo "Error: Serial device \"/dev/tty.usbmodem12341\" does not exist!" >&2
+            exit 1
+        fi
+

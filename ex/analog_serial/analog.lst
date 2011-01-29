@@ -1,0 +1,207 @@
+   1               		.file	"analog.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               		.section	.text.analogReference,"ax",@progbits
+  17               	.global	analogReference
+  19               	analogReference:
+  20               	.LFB6:
+  21               	.LSM0:
+  22               	.LVL0:
+  23               	/* prologue: function */
+  24               	/* frame size = 0 */
+  25               	.LSM1:
+  26 0000 807C      		andi r24,lo8(-64)
+  27               	.LVL1:
+  28 0002 8093 0000 		sts aref,r24
+  29               	/* epilogue start */
+  30               	.LSM2:
+  31 0006 0895      		ret
+  32               	.LFE6:
+  34               		.section	.text.adc_read,"ax",@progbits
+  35               	.global	adc_read
+  37               	adc_read:
+  38               	.LFB8:
+  39               	.LSM3:
+  40               	.LVL2:
+  41               	/* prologue: function */
+  42               	/* frame size = 0 */
+  43               	.LSM4:
+  44 0000 96E8      		ldi r25,lo8(-122)
+  45 0002 9093 7A00 		sts 122,r25
+  46               	.LSM5:
+  47 0006 982F      		mov r25,r24
+  48 0008 9072      		andi r25,lo8(32)
+  49 000a 9068      		ori r25,lo8(-128)
+  50 000c 9093 7B00 		sts 123,r25
+  51               	.LSM6:
+  52 0010 8F71      		andi r24,lo8(31)
+  53               	.LVL3:
+  54 0012 9091 0000 		lds r25,aref
+  55 0016 982B      		or r25,r24
+  56 0018 9093 7C00 		sts 124,r25
+  57               	.LSM7:
+  58 001c 86EC      		ldi r24,lo8(-58)
+  59               	.LVL4:
+  60 001e 8093 7A00 		sts 122,r24
+  61               	.L4:
+  62               	.LSM8:
+  63 0022 8091 7A00 		lds r24,122
+  64 0026 86FD      		sbrc r24,6
+  65 0028 00C0      		rjmp .L4
+  66               	.LSM9:
+  67 002a 2091 7800 		lds r18,120
+  68               	.LVL5:
+  69               	.LSM10:
+  70 002e 4091 7900 		lds r20,121
+  71 0032 942F      		mov r25,r20
+  72 0034 80E0      		ldi r24,lo8(0)
+  73 0036 30E0      		ldi r19,lo8(0)
+  74 0038 282B      		or r18,r24
+  75 003a 392B      		or r19,r25
+  76               	.LVL6:
+  77               	.LSM11:
+  78 003c C901      		movw r24,r18
+  79               	/* epilogue start */
+  80 003e 0895      		ret
+  81               	.LFE8:
+  83               		.section	.text.analogRead,"ax",@progbits
+  84               	.global	analogRead
+  86               	analogRead:
+  87               	.LFB7:
+  88               	.LSM12:
+  89               	.LVL7:
+  90               	/* prologue: function */
+  91               	/* frame size = 0 */
+  92               	.LSM13:
+  93 0000 8C30      		cpi r24,lo8(12)
+  94 0002 00F0      		brlo .L8
+  95 0004 20E0      		ldi r18,lo8(0)
+  96 0006 30E0      		ldi r19,hi8(0)
+  97 0008 00C0      		rjmp .L9
+  98               	.L8:
+  99               	.LBB2:
+ 100               	.LSM14:
+ 101 000a E82F      		mov r30,r24
+ 102 000c F0E0      		ldi r31,lo8(0)
+ 103               	.LVL8:
+ 104 000e E050      		subi r30,lo8(-(pin_to_mux.1400))
+ 105 0010 F040      		sbci r31,hi8(-(pin_to_mux.1400))
+ 106               	.LVL9:
+ 107               	/* #APP */
+ 108               	 ;  32 "analog.c" 1
+ 109 0012 E491      		lpm r30, Z
+ 110               		
+ 111               	 ;  0 "" 2
+ 112               	.LVL10:
+ 113               	/* #NOAPP */
+ 114               	.LBE2:
+ 115 0014 8E2F      		mov r24,r30
+ 116 0016 0E94 0000 		call adc_read
+ 117               	.LVL11:
+ 118 001a 9C01      		movw r18,r24
+ 119               	.LVL12:
+ 120               	.L9:
+ 121               	.LSM15:
+ 122 001c C901      		movw r24,r18
+ 123               	.LVL13:
+ 124               	/* epilogue start */
+ 125 001e 0895      		ret
+ 126               	.LFE7:
+ 128               		.section	.text.main,"ax",@progbits
+ 129               	.global	main
+ 131               	main:
+ 132               	.LFB9:
+ 133               	.LSM16:
+ 134               	/* prologue: function */
+ 135               	/* frame size = 0 */
+ 136               	.LSM17:
+ 137 0000 80E8      		ldi r24,lo8(-128)
+ 138 0002 8093 6100 		sts 97,r24
+ 139 0006 1092 6100 		sts 97,__zero_reg__
+ 140               	.LSM18:
+ 141 000a 0E94 0000 		call usb_init
+ 142               	.LSM19:
+ 143 000e 569A      		sbi 42-32,6
+ 144               	.L17:
+ 145               	.LSM20:
+ 146 0010 5E9A      		sbi 43-32,6
+ 147               	.L16:
+ 148               	.LBB3:
+ 149               	.LSM21:
+ 150 0012 81E0      		ldi r24,lo8(1)
+ 151 0014 0E94 0000 		call analogRead
+ 152 0018 9093 0000 		sts (analogR)+1,r25
+ 153 001c 8093 0000 		sts analogR,r24
+ 154               	.LSM22:
+ 155 0020 0E94 0000 		call usb_serial_getchar
+ 156               	.LSM23:
+ 157 0024 97FD      		sbrc r25,7
+ 158 0026 00C0      		rjmp .L12
+ 159               	.LVL14:
+ 160 0028 0E94 0000 		call usb_serial_putchar
+ 161               	.LVL15:
+ 162               	.L12:
+ 163               	.LSM24:
+ 164 002c 8091 0000 		lds r24,analogR
+ 165               	.LVL16:
+ 166 0030 0E94 0000 		call usb_serial_putchar
+ 167               	.LSM25:
+ 168 0034 8091 0000 		lds r24,analogR
+ 169 0038 9091 0000 		lds r25,(analogR)+1
+ 170 003c 1816      		cp __zero_reg__,r24
+ 171 003e 1906      		cpc __zero_reg__,r25
+ 172 0040 04F4      		brge .L17
+ 173               	.LSM26:
+ 174 0042 5E98      		cbi 43-32,6
+ 175 0044 00C0      		rjmp .L16
+ 176               	.LBE3:
+ 177               	.LFE9:
+ 179               	.global	charTest
+ 180               		.data
+ 183               	charTest:
+ 184 0000 78        		.byte	120
+ 187               	aref:
+ 188 0001 40        		.byte	64
+ 189               		.section	.progmem.data,"a",@progbits
+ 192               	pin_to_mux.1400:
+ 193 0000 00        		.byte	0
+ 194 0001 01        		.byte	1
+ 195 0002 04        		.byte	4
+ 196 0003 06        		.byte	6
+ 197 0004 07        		.byte	7
+ 198 0005 25        		.byte	37
+ 199 0006 24        		.byte	36
+ 200 0007 23        		.byte	35
+ 201 0008 22        		.byte	34
+ 202 0009 21        		.byte	33
+ 203 000a 20        		.byte	32
+ 204               		.comm analogR,2,1
+ 253               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 analog.c
+/var/folders/vl/vloiNkOOGt8rECv8nlI5zU+++TI/-Tmp-//ccMzQzE5.s:2      *ABS*:0000003f __SREG__
+/var/folders/vl/vloiNkOOGt8rECv8nlI5zU+++TI/-Tmp-//ccMzQzE5.s:3      *ABS*:0000003e __SP_H__
+/var/folders/vl/vloiNkOOGt8rECv8nlI5zU+++TI/-Tmp-//ccMzQzE5.s:4      *ABS*:0000003d __SP_L__
+/var/folders/vl/vloiNkOOGt8rECv8nlI5zU+++TI/-Tmp-//ccMzQzE5.s:5      *ABS*:00000034 __CCP__
+/var/folders/vl/vloiNkOOGt8rECv8nlI5zU+++TI/-Tmp-//ccMzQzE5.s:6      *ABS*:00000000 __tmp_reg__
+/var/folders/vl/vloiNkOOGt8rECv8nlI5zU+++TI/-Tmp-//ccMzQzE5.s:7      *ABS*:00000001 __zero_reg__
+/var/folders/vl/vloiNkOOGt8rECv8nlI5zU+++TI/-Tmp-//ccMzQzE5.s:19     .text.analogReference:00000000 analogReference
+/var/folders/vl/vloiNkOOGt8rECv8nlI5zU+++TI/-Tmp-//ccMzQzE5.s:187    .data:00000001 aref
+/var/folders/vl/vloiNkOOGt8rECv8nlI5zU+++TI/-Tmp-//ccMzQzE5.s:37     .text.adc_read:00000000 adc_read
+/var/folders/vl/vloiNkOOGt8rECv8nlI5zU+++TI/-Tmp-//ccMzQzE5.s:86     .text.analogRead:00000000 analogRead
+/var/folders/vl/vloiNkOOGt8rECv8nlI5zU+++TI/-Tmp-//ccMzQzE5.s:192    .progmem.data:00000000 pin_to_mux.1400
+/var/folders/vl/vloiNkOOGt8rECv8nlI5zU+++TI/-Tmp-//ccMzQzE5.s:131    .text.main:00000000 main
+                            *COM*:00000002 analogR
+/var/folders/vl/vloiNkOOGt8rECv8nlI5zU+++TI/-Tmp-//ccMzQzE5.s:183    .data:00000000 charTest
+
+UNDEFINED SYMBOLS
+usb_init
+usb_serial_getchar
+usb_serial_putchar
+__do_copy_data
+__do_clear_bss

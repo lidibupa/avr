@@ -1,0 +1,15 @@
+> I spent quite awhile trying to port other people's modified Arduino Makefiles to work with Teensy, but since I couldn't find the Teensy Makefile and the HalfKay bootloader is mysteriously located somewhere else, I wasn't able to do it.
+>
+> Do you think it is possible to compile Arduino code and upload it to the Teensy without the IDE using what's available, or would that require fuss on your end (which I'm sure you're too busy for)?
+
+Simply compiling the code should not be much different than Arduino.  I'd suggest you first make sure that is working.  To do the actual upload, just keep Teensy Loader in auto mode and push the button on the board to initiate the programming.  Until you're certain the .hex file is being built correctly, there's not much point in trying to go further.
+
+Inside the arduino folder, there's a program called "teensy_reboot".  On Windows and Mac it's probably in hardware/tools/avr/bin.  Linux has a slightly different location.  That little program tries to find a Teensy which is running previously compiled code (eg, one of the USB types Teensyduino compiles) and sends it a request to reboot.  It also talks to the Teensy Loader program to put it into auto mode.  After you've compiled the .hex file, just run that program.  The Teensy Loader auto mode will do the rest.
+
+There's also a "teensy_post_compile" which can tell the Teensy Loader the name and location of the freshly compiled .hex file.  You don't really need that, as it's pretty easy to just open the file once and thereafter the Teensy Loader will remember it.  But if you get everything else working, that will let you fully automate things.
+
+The "teensy_gateway" lets you talk to the "Serial" object on the non-serial types.  Just run it, and then you can use telnet to 127.0.0.1 port 28541 to connect to Serial.  If you want to initiate an arduino style restart (eg, when the serial monitor window is opened), there's a little program in there which does that for you.
+
+That should give you everything which can be done in the Arduino IDE.  If you need any reference on how to run these programs, just look at the modified java source code which is installed to a "src" directory inside your arduino folder.  Now that you know these program names, it's pretty easy to just search those files to find the places they're run from the Arduino IDE.  Make is designed to run programs (really, more easily than Java), so you should be able to make it do anything the IDE does.
+
+from Paul @ PJRC

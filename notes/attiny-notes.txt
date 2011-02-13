@@ -1,0 +1,29 @@
+AVR ATtiny Microcontrollers:
+
+ATtiny85 is the most powerful 8-bin chip:
+http://www.atmel.com/dyn/products/product_card.asp?part_id=3612&category_id=163&family_id=607&subfamily_id=791
+
+
+ATtiny13 is very similar, just less Flash:
+http://www.atmel.com/dyn/products/product_card.asp?part_id=3175&category_id=163&family_id=607&subfamily_id=791
+
+COMPARISON:
+Chip            A/D     PWM     Flash   IO Pins F.max   Osc.    Price
+ATtiny13        4       2       1       6       20      9.6     $2
+ATtiny85        2       8       6       20      8       8       $2.25
+
+COMMON:
+Package:    PDIP8
+F.max       20MHz 
+Vcc         1.8V-5.5V
+
+RESOURCES:
+Getting Started:
+http://hlt.media.mit.edu/wiki/pmwiki.php?n=Main.AVRProgramming
+
+Advanced:
+http://hlt.media.mit.edu/wiki/pmwiki.php?n=Main.AVRProgrammingAdvanced
+
+Programming ATTiny with Arduino: 
+http://hlt.media.mit.edu/wiki/pmwiki.php?n=Main.ArduinoATtiny4585
+

@@ -1,0 +1,28 @@
+AVR Micocontrollers with USB Support
+
+Arduino is a wonderful platform for designers, artists and anybody who doesn't want to spend hours picking out chips and learning the AVR toolchain. But for tasks that require high-speed data acquisition, the Arduino has a fatal flaw: no built-in USB means that funneling data to a PC is suboptimal. The Arduino uses an FTDI chip to do serial to USB conversion, which doesn't allow you you to take full advantage of USB speed.
+
+AVR offers a number of ATMega chips with built-in USB capability that can give you better data throughput. This page collects notes on how to find and use these chips.
+
+
+* Teensy
+* Micropendous
+* Ada Fruit ATMega32u4 breakout
+* LUFA library
+* LUFAduino
+* FreeRTOS
+
+ATMega Chips with USB Support + A/D:
+Chip            A/D     PWM    Flash    RTC     IO Pins 
+AT90USB1286     8       9      128      Yes     48
+AT90USB1287     8       9      128      Yes     48
+AT90USB646      8       9      64       Yes     48
+AT90USB647      8       9      64       Yes     48
+ATmega16U4      12      8      16       No      26
+ATmega32U4      12      8      32       No      26
+
+COMMON:
+Package:    TQFP/VQFN 64/44
+USB:        LS/FS Device (+OTG)
+F.max       16MHz
+Vcc         2.7V-5.5V

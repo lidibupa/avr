@@ -4,7 +4,6 @@ Arduino is a wonderful platform for designers, artists and anybody who doesn't w
 
 AVR offers a number of ATMega chips with built-in USB capability that can give you better data throughput. This page collects notes on how to find and use these chips.
 
-
 * Teensy
 * Micropendous
 * Ada Fruit ATMega32u4 breakout

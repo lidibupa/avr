@@ -1,0 +1,30 @@
+Looking for a good instrumentation amplifier that I can use to amplify weak sensor input. The amplifier should have programmable gain so that the gain can be continually or automatically adjusted to the appropriate level for disparate applications or varying conditions.
+
+I'm hoping that I can create a sort of min-max scaling program on perhaps an ATtiny13 that will allow you to calibrate the amplifiers. (This also, unfortunately, implies retraining everything at the same time.)
+
+Notes:
+After reading the AD557 datasheet's notes on programming, it seems that PGA's are meant to be set once and left. If not, a program will need to be written to the microcontroller that sets up the gain every time the system is started up.
+
+Writing a program to control the PGA will be non-trivial. It needs very specific pulses and I will need to figure that out myself. Wouldn't it be easier to just use knobs?
+
+What about calibrating an analog filter using variable resistors? 
+
+Analog Devices:
+
+AD8555: Digital Programmable Sensor Signal Zero-Drift Amplifier:
+The AD8555 is a zero-drift, sensor signal amplifier with digital-ly programmable gain and output offset. Designed to easily and accurately convert variable pressure sensor and strain bridge outputs to a well-defined output voltage range, the AD8555 also accurately amplifies many other differential or single-ended sensor outputs. The AD8555 uses the ADI patented low noise auto-zero and DigiTrim® technologies to create an incredibly accurate and flexible signal processing solution in a very compact footprint.
+
+Gain is digitally programmable in a wide range from 70 to 1,280 through a serial data interface. Gain adjustment can be fully simulated in-circuit and then permanently programmed with proven and reliable poly-fuse technology. Output offset voltage is also digitally programmable and is ratiometric to the supply voltage.
+
+AD8557:  Digitally Programmable Sensor Signal Amplifier:
+The AD8557 is a zero drift, sensor signal amplifier with digitally programmable gain and output offset. Designed to easily and accurately convert variable pressure sensor and strain bridge outputs to a well defined output voltage range, the AD8557 accurately amplifies many other differential or single-ended sensor outputs. The AD8557 uses the ADI-patented low noise auto-zero and DigiTrim® technologies to create an accurate and flexible signal processing solution in a compact footprint.
+
+Gain is digitally programmable in a wide range from 28 to 1300 through a serial data interface. Gain adjustment can be fully simulated in circuit and then permanently programmed with reliable polyfuse technology. Output offset voltage is also digitally programmable and is ratiometric to the supply voltage.
+ 
+AD8290: G=50, CMOS Sensor Amplifier with Current Excitation:
+The AD8290 contains both an adjustable current source to drive a sensor and a difference amplifier to amplify the signal voltage. The amplifier is set for a fixed gain of 50. The AD8290 is an excellent solution for both the drive and the sensing aspects required for pressure, temperature, and strain gage bridges.
+
+In addition, because the AD8290 operates with low power, works with a range of low supply voltages, and is available in a low profile package, it is suitable for drive/sense circuits in portable electronics as well.
+
+The AD8290 is available in a lead free 3.0 mm × 3.0 mm × 0.55 mm package and is operational over the industrial temperature range of −40°C to +85°C.
+
